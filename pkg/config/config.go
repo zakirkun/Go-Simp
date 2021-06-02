@@ -151,19 +151,20 @@ const (
 
 //ConfigFile config file struct for config.toml
 type ConfigFile struct {
-	Discord        string `toml:"Discord"`
-	BiliSess       string `toml:"BiliSess"`
-	PixivSession   string `toml:"PixivSess"`
-	SauceAPI       string `toml:"SauceAPI"`
-	InviteLog      string `toml:"InviteLog"`
-	PilotReporting string `toml:"PilotReporting"`
-	MultiTOR       string `toml:"Multitor"`
-	DonationLink   string `toml:"DonationLink"`
-	TopGG          string `toml:"TOPGG"`
-	Domain         string `toml:"Domain"`
-	LowResources   bool   `toml:"LowResources"` //Disable update like fanart & set wait every 5 counter
-	Metric         bool   `toml:"Metric"`
-	Twitch         struct {
+	Discord           string `toml:"Discord"`
+	BiliSess          string `toml:"BiliSess"`
+	PixivSession      string `toml:"PixivSess"`
+	SauceAPI          string `toml:"SauceAPI"`
+	InviteLog         string `toml:"InviteLog"`
+	PilotReporting    string `toml:"PilotReporting"`
+	MultiTOR          string `toml:"Multitor"`
+	CloudscraperProxy string `toml:"CloudscraperProxy"`
+	DonationLink      string `toml:"DonationLink"`
+	TopGG             string `toml:"TOPGG"`
+	Domain            string `toml:"Domain"`
+	LowResources      bool   `toml:"LowResources"` //Disable update like fanart & set wait every 5 counter
+	Metric            bool   `toml:"Metric"`
+	Twitch            struct {
 		ClientID     string `toml:"ClientID"`
 		ClientSecret string `toml:"ClientSecret"`
 	} `toml:"Twitch"`
