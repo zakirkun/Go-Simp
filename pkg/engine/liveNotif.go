@@ -276,13 +276,11 @@ func SendLiveNotif(Data *database.LiveStream, Bot *discordgo.Session) {
 							}
 
 							if !Channel.LiteMode {
-								Msg := "Push " + config.GoSimpConf.Emoji.Livestream[0] + " to add you in `" + Data.Member.Name + "` ping list\nPush " + config.GoSimpConf.Emoji.Livestream[1] + " to remove you from ping list"
 								MsgFinal := ""
-
 								if Data.IsBiliLive {
-									MsgFinal = "`" + Data.Member.Name + "` Live right now at BiliBili And Youtube\nUserTags: " + strings.Join(UserTagsList, " ") + "\n" + Msg
+									MsgFinal = "`" + Data.Member.Name + "` Live right now at BiliBili And Youtube\nUserTags: " + strings.Join(UserTagsList, " ")
 								} else {
-									MsgFinal = "`" + Data.Member.Name + "` Live right now\nUserTags: " + strings.Join(UserTagsList, " ") + "\n" + Msg
+									MsgFinal = "`" + Data.Member.Name + "` Live right now\nUserTags: " + strings.Join(UserTagsList, " ")
 								}
 
 								msgText, err := Bot.ChannelMessageSend(Channel.ChannelID, MsgFinal)
@@ -607,8 +605,7 @@ func SendLiveNotif(Data *database.LiveStream, Bot *discordgo.Session) {
 							}
 
 							if !Channel.LiteMode {
-								Msg := "Push " + config.GoSimpConf.Emoji.Livestream[0] + " to add you in `" + Data.Member.Name + "` ping list\nPush " + config.GoSimpConf.Emoji.Livestream[1] + " to remove you from ping list"
-								MsgTxt, err := Bot.ChannelMessageSend(Channel.ChannelID, "`"+Data.Member.Name+"` Live right now\nUserTags: "+strings.Join(UserTagsList, " ")+"\n"+Msg)
+								MsgTxt, err := Bot.ChannelMessageSend(Channel.ChannelID, "`"+Data.Member.Name+"` Live right now\nUserTags: "+strings.Join(UserTagsList, " ")+"\n")
 								if err != nil {
 									log.Error(err)
 									return
@@ -766,8 +763,7 @@ func SendLiveNotif(Data *database.LiveStream, Bot *discordgo.Session) {
 						}
 
 						if !Channel.LiteMode {
-							Msg := "Push " + config.GoSimpConf.Emoji.Livestream[0] + " to add you in `" + Data.Member.Name + "` ping list\nPush " + config.GoSimpConf.Emoji.Livestream[1] + " to remove you from ping list"
-							msg, err := Bot.ChannelMessageSend(Channel.ChannelID, "`"+Data.Member.Name+"` Live right now\nUserTags: "+strings.Join(UserTagsList, " ")+"\n"+Msg)
+							msg, err := Bot.ChannelMessageSend(Channel.ChannelID, "`"+Data.Member.Name+"` Live right now\nUserTags: "+strings.Join(UserTagsList, " "))
 							if err != nil {
 								log.Error(err)
 							}
