@@ -193,19 +193,21 @@ func (i *checkBlLiveeJob) Run() {
 									}).Error(err)
 								}
 
-								if config.GoSimpConf.Metric {
-									bit, err := Bili.MarshalBinary()
-									if err != nil {
-										log.WithFields(log.Fields{
-											"Agency": Agency.GroupName,
-											"Vtuber": Member.Name,
-										}).Error(err)
+								/*
+									if config.GoSimpConf.Metric {
+										bit, err := Bili.MarshalBinary()
+										if err != nil {
+											log.WithFields(log.Fields{
+												"Agency": Agency.GroupName,
+												"Vtuber": Member.Name,
+											}).Error(err)
+										}
+										gRCPconn.MetricReport(context.Background(), &pilot.Metric{
+											MetricData: bit,
+											State:      config.LiveStatus,
+										})
 									}
-									gRCPconn.MetricReport(context.Background(), &pilot.Metric{
-										MetricData: bit,
-										State:      config.LiveStatus,
-									})
-								}
+								*/
 
 								engine.SendLiveNotif(&Bili, Bot)
 
@@ -227,19 +229,21 @@ func (i *checkBlLiveeJob) Run() {
 									}).Error(err)
 								}
 
-								if config.GoSimpConf.Metric {
-									bit, err := Bili.MarshalBinary()
-									if err != nil {
-										log.WithFields(log.Fields{
-											"Agency": Agency.GroupName,
-											"Vtuber": Member.Name,
-										}).Error(err)
+								/*
+									if config.GoSimpConf.Metric {
+										bit, err := Bili.MarshalBinary()
+										if err != nil {
+											log.WithFields(log.Fields{
+												"Agency": Agency.GroupName,
+												"Vtuber": Member.Name,
+											}).Error(err)
+										}
+										gRCPconn.MetricReport(context.Background(), &pilot.Metric{
+											MetricData: bit,
+											State:      config.PastStatus,
+										})
 									}
-									gRCPconn.MetricReport(context.Background(), &pilot.Metric{
-										MetricData: bit,
-										State:      config.PastStatus,
-									})
-								}
+								*/
 
 							} else {
 								Bili.UpdateViewers(strconv.Itoa(Status.Data.RoomInfo.Online))

@@ -197,21 +197,23 @@ func StartCheckYT(Group database.Group, Update bool) {
 
 						engine.RemoveEmbed(ID, Bot)
 
-						if config.GoSimpConf.Metric {
-							bit, err := YoutubeData.MarshalBinary()
-							if err != nil {
-								log.WithFields(log.Fields{
-									"agency":    Group.GroupName,
-									"channelID": YtChan.YtChannel,
-									"region":    YtChan.Region,
-								}).Error(err)
-							}
+						/*
+							if config.GoSimpConf.Metric {
+								bit, err := YoutubeData.MarshalBinary()
+								if err != nil {
+									log.WithFields(log.Fields{
+										"agency":    Group.GroupName,
+										"channelID": YtChan.YtChannel,
+										"region":    YtChan.Region,
+									}).Error(err)
+								}
 
-							gRCPconn.MetricReport(context.Background(), &pilot.Metric{
-								MetricData: bit,
-								State:      config.PastStatus,
-							})
-						}
+								gRCPconn.MetricReport(context.Background(), &pilot.Metric{
+									MetricData: bit,
+									State:      config.PastStatus,
+								})
+							}
+						*/
 
 					} else if Items.Snippet.VideoStatus == config.LiveStatus && YoutubeData.Status == config.UpcomingStatus {
 						log.WithFields(log.Fields{
@@ -450,19 +452,21 @@ func StartCheckYT(Group database.Group, Update bool) {
 								}
 							}
 
-							if config.GoSimpConf.Metric {
-								bit, err := NewYoutubeData.MarshalBinary()
-								if err != nil {
-									log.WithFields(log.Fields{
-										"Vtuber": Member.Name,
-										"Agency": Group.GroupName,
-									}).Error(err)
+							/*
+								if config.GoSimpConf.Metric {
+									bit, err := NewYoutubeData.MarshalBinary()
+									if err != nil {
+										log.WithFields(log.Fields{
+											"Vtuber": Member.Name,
+											"Agency": Group.GroupName,
+										}).Error(err)
+									}
+									gRCPconn.MetricReport(context.Background(), &pilot.Metric{
+										MetricData: bit,
+										State:      config.LiveStatus,
+									})
 								}
-								gRCPconn.MetricReport(context.Background(), &pilot.Metric{
-									MetricData: bit,
-									State:      config.LiveStatus,
-								})
-							}
+							*/
 
 							if !Items.LiveDetails.ActualStartTime.IsZero() {
 								NewYoutubeData.UpdateSchdule(Items.LiveDetails.ActualStartTime)
@@ -544,19 +548,21 @@ func StartCheckYT(Group database.Group, Update bool) {
 
 							engine.RemoveEmbed(ID, Bot)
 
-							if config.GoSimpConf.Metric {
-								bit, err := YoutubeData.MarshalBinary()
-								if err != nil {
-									log.WithFields(log.Fields{
-										"Vtuber": Member.Name,
-										"Agency": Group.GroupName,
-									}).Error(err)
+							/*
+								if config.GoSimpConf.Metric {
+									bit, err := YoutubeData.MarshalBinary()
+									if err != nil {
+										log.WithFields(log.Fields{
+											"Vtuber": Member.Name,
+											"Agency": Group.GroupName,
+										}).Error(err)
+									}
+									gRCPconn.MetricReport(context.Background(), &pilot.Metric{
+										MetricData: bit,
+										State:      config.PastStatus,
+									})
 								}
-								gRCPconn.MetricReport(context.Background(), &pilot.Metric{
-									MetricData: bit,
-									State:      config.PastStatus,
-								})
-							}
+							*/
 
 						} else if Items.Snippet.VideoStatus == config.LiveStatus && YoutubeData.Status == config.UpcomingStatus {
 							log.WithFields(log.Fields{

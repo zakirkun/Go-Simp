@@ -238,20 +238,22 @@ func (i *checkYtJob) Run() {
 											SetState(config.YoutubeLive).
 											UpdateYt(config.LiveStatus)
 
-										if config.GoSimpConf.Metric {
-											bit, err := Youtube.MarshalBinary()
-											if err != nil {
-												log.WithFields(log.Fields{
-													"agency":  Group.GroupName,
-													"videoID": Youtube.VideoID,
-													"region":  Youtube.GroupYoutube.Region,
-												}).Error(err)
-											}
-											gRCPconn.MetricReport(context.Background(), &pilot.Metric{
-												MetricData: bit,
-												State:      config.LiveStatus,
-											})
-										}
+											/*
+												if config.GoSimpConf.Metric {
+													bit, err := Youtube.MarshalBinary()
+													if err != nil {
+														log.WithFields(log.Fields{
+															"agency":  Group.GroupName,
+															"videoID": Youtube.VideoID,
+															"region":  Youtube.GroupYoutube.Region,
+														}).Error(err)
+													}
+													gRCPconn.MetricReport(context.Background(), &pilot.Metric{
+														MetricData: bit,
+														State:      config.LiveStatus,
+													})
+												}
+											*/
 
 										isMemberOnly, err := regexp.MatchString("(memberonly|member|メン限)", strings.ToLower(Youtube.Title))
 										if err != nil {
@@ -304,20 +306,22 @@ func (i *checkYtJob) Run() {
 										Youtube.UpdateLength(LiveDur).UpdateYt(config.PastStatus)
 										engine.RemoveEmbed(Youtube.VideoID, Bot)
 
-										if config.GoSimpConf.Metric {
-											bit, err := Youtube.MarshalBinary()
-											if err != nil {
-												log.WithFields(log.Fields{
-													"agency":  Group.GroupName,
-													"videoID": Youtube.VideoID,
-													"region":  Youtube.GroupYoutube.Region,
-												}).Error(err)
+										/*
+											if config.GoSimpConf.Metric {
+												bit, err := Youtube.MarshalBinary()
+												if err != nil {
+													log.WithFields(log.Fields{
+														"agency":  Group.GroupName,
+														"videoID": Youtube.VideoID,
+														"region":  Youtube.GroupYoutube.Region,
+													}).Error(err)
+												}
+												gRCPconn.MetricReport(context.Background(), &pilot.Metric{
+													MetricData: bit,
+													State:      config.PastStatus,
+												})
 											}
-											gRCPconn.MetricReport(context.Background(), &pilot.Metric{
-												MetricData: bit,
-												State:      config.PastStatus,
-											})
-										}
+										*/
 									}
 
 								} else if Data.Items == nil || len(Data.Items) == 0 {
@@ -434,21 +438,23 @@ func (i *checkYtJob) Run() {
 											}
 										}
 
-										if config.GoSimpConf.Metric {
-											bit, err := Youtube.MarshalBinary()
-											if err != nil {
-												log.WithFields(log.Fields{
-													"Vtuber":  Member.EnName,
-													"Agency":  Group.GroupName,
-													"VideoID": Youtube.VideoID,
-												}).Error(err)
-											}
+										/*
+											if config.GoSimpConf.Metric {
+												bit, err := Youtube.MarshalBinary()
+												if err != nil {
+													log.WithFields(log.Fields{
+														"Vtuber":  Member.EnName,
+														"Agency":  Group.GroupName,
+														"VideoID": Youtube.VideoID,
+													}).Error(err)
+												}
 
-											gRCPconn.MetricReport(context.Background(), &pilot.Metric{
-												MetricData: bit,
-												State:      config.LiveStatus,
-											})
-										}
+												gRCPconn.MetricReport(context.Background(), &pilot.Metric{
+													MetricData: bit,
+													State:      config.LiveStatus,
+												})
+											}
+										*/
 
 										isMemberOnly, err := regexp.MatchString("(memberonly|member|メン限)", strings.ToLower(Youtube.Title))
 										if err != nil {
@@ -501,20 +507,22 @@ func (i *checkYtJob) Run() {
 										Youtube.UpdateLength(LiveDur).UpdateYt(config.PastStatus)
 										engine.RemoveEmbed(Youtube.VideoID, Bot)
 
-										if config.GoSimpConf.Metric {
-											bit, err := Youtube.MarshalBinary()
-											if err != nil {
-												log.WithFields(log.Fields{
-													"Vtuber":  Member.EnName,
-													"Agency":  Group.GroupName,
-													"VideoID": Youtube.VideoID,
-												}).Error(err)
+										/*
+											if config.GoSimpConf.Metric {
+												bit, err := Youtube.MarshalBinary()
+												if err != nil {
+													log.WithFields(log.Fields{
+														"Vtuber":  Member.EnName,
+														"Agency":  Group.GroupName,
+														"VideoID": Youtube.VideoID,
+													}).Error(err)
+												}
+												gRCPconn.MetricReport(context.Background(), &pilot.Metric{
+													MetricData: bit,
+													State:      config.PastStatus,
+												})
 											}
-											gRCPconn.MetricReport(context.Background(), &pilot.Metric{
-												MetricData: bit,
-												State:      config.PastStatus,
-											})
-										}
+										*/
 									}
 
 								} else if Data.Items == nil || len(Data.Items) == 0 {

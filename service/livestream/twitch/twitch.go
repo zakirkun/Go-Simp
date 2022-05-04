@@ -259,19 +259,21 @@ func (i *checkTwcJob) Run() {
 
 						engine.RemoveEmbed("Twitch"+Member.TwitchName, Bot)
 
-						if config.GoSimpConf.Metric {
-							bit, err := ResultDB.MarshalBinary()
-							if err != nil {
-								log.WithFields(log.Fields{
-									"Agency": Group.GroupName,
-									"Vtuber": Member.Name,
-								}).Error(err)
+						/*
+							if config.GoSimpConf.Metric {
+								bit, err := ResultDB.MarshalBinary()
+								if err != nil {
+									log.WithFields(log.Fields{
+										"Agency": Group.GroupName,
+										"Vtuber": Member.Name,
+									}).Error(err)
+								}
+								gRCPconn.MetricReport(context.Background(), &pilot.Metric{
+									MetricData: bit,
+									State:      config.PastStatus,
+								})
 							}
-							gRCPconn.MetricReport(context.Background(), &pilot.Metric{
-								MetricData: bit,
-								State:      config.PastStatus,
-							})
-						}
+						*/
 					}
 
 				}(v, &wg)

@@ -329,7 +329,7 @@ func (s *Server) MetricReport(ctx context.Context, in *Metric) (*Empty, error) {
 		}
 
 		log.WithFields(log.Fields{
-			"Vtuber": FanArt.Member.EnName,
+			"Vtuber": FanArt.Member.Name,
 			"State":  in.State,
 		}).Info("Update Fanart metric")
 
@@ -392,76 +392,6 @@ func (s *Server) MetricReport(ctx context.Context, in *Metric) (*Empty, error) {
 				Subs.Group.GroupName,
 				"Twitter",
 			).Set(float64(Subs.TwFollow))
-		}
-	} else if in.State == config.LiveStatus {
-		var LiveData database.LiveStream
-		err := json.Unmarshal(in.MetricData, &LiveData)
-		if err != nil {
-			log.Error(err)
-		}
-
-		log.WithFields(log.Fields{
-			"Vtuber": LiveData.Member.EnName,
-			"State":  in.State,
-		}).Info("Update Livestream metric")
-
-		if LiveData.State == config.YoutubeLive && !LiveData.Member.IsYtNill() {
-			metric.GetLive.WithLabelValues(
-				LiveData.Member.Name,
-				LiveData.Group.GroupName,
-				"Youtube",
-			).Inc()
-		} else if LiveData.State == config.BiliLive && !LiveData.Member.IsBiliNill() {
-			metric.GetLive.WithLabelValues(
-				LiveData.Member.Name,
-				LiveData.Group.GroupName,
-				"BiliBili",
-			).Inc()
-		} else if LiveData.State == config.TwitchLive {
-			metric.GetLive.WithLabelValues(
-				LiveData.Member.Name,
-				LiveData.Group.GroupName,
-				"Twitch",
-			).Inc()
-		}
-	} else if in.State == config.PastStatus {
-		var LiveData database.LiveStream
-		err := json.Unmarshal(in.MetricData, &LiveData)
-		if err != nil {
-			log.Error(err)
-		}
-
-		if LiveData.End.IsZero() {
-			return &Empty{}, nil
-		}
-
-		Time := LiveData.End.Sub(LiveData.Schedul).Minutes()
-
-		log.WithFields(log.Fields{
-			"Vtuber":  LiveData.Member.EnName,
-			"State":   in.State,
-			"Time":    int(Time),
-			"VideoID": LiveData.VideoID,
-		}).Info("Update past Livestream metric")
-
-		if LiveData.State == config.YoutubeLive && !LiveData.Member.IsYtNill() {
-			metric.GetLiveDuration.WithLabelValues(
-				LiveData.Member.Name,
-				LiveData.Group.GroupName,
-				"Youtube",
-			).Add(Time)
-		} else if LiveData.State == config.BiliLive && !LiveData.Member.IsBiliNill() {
-			metric.GetLiveDuration.WithLabelValues(
-				LiveData.Member.Name,
-				LiveData.Group.GroupName,
-				"BiliBili",
-			).Add(Time)
-		} else if LiveData.State == config.TwitchLive {
-			metric.GetLiveDuration.WithLabelValues(
-				LiveData.Member.Name,
-				LiveData.Group.GroupName,
-				"Twitch",
-			).Add(Time)
 		}
 	}
 
